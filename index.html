@@ -13,6 +13,7 @@
       * {
         margin: 0;
         padding: 0;
+
         box-sizing: border-box;
       }
 
@@ -208,25 +209,193 @@
       }
 
       /* Responsividade */
-      @media (max-width: 768px) {
-        .nav-links {
-          display: none;
+      @media (max-width: 1024px) {
+        .hero-content h1 {
+          font-size: 3rem;
         }
 
-        .about-content {
-          grid-template-columns: 1fr;
+        .hero-content p {
+          font-size: 1.2rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+
+        .nav-links {
+          display: none;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background: #2c3e50;
+          flex-direction: column;
+          padding: 1rem;
+          text-align: center;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links a {
+          padding: 0.5rem 0;
+        }
+
+        .hero {
+          padding-top: 80px;
         }
 
         .hero-content h1 {
           font-size: 2.5rem;
         }
+
+        .hero-content p {
+          font-size: 1.1rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .language-switch {
+          top: 15px;
+          right: 15px;
+          padding: 6px 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+
+        .hero-content p {
+          font-size: 1rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .project-card {
+          margin: 0 1rem;
+        }
+
+        .contact-form {
+          padding: 0 1rem;
+        }
+
+        .btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .language-switch {
+          font-size: 0.9rem;
+          padding: 4px 8px;
+        }
+      }
+
+      /* Ajustes para telas muito pequenas */
+      @media (max-width: 320px) {
+        .hero-content h1 {
+          font-size: 1.8rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .about-text {
+          font-size: 1rem;
+        }
+
+        .project-info h3 {
+          font-size: 1.2rem;
+        }
+
+        .project-info p {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Ajustes para telas muito grandes */
+      @media (min-width: 1440px) {
+        .hero-content h1 {
+          font-size: 4rem;
+        }
+
+        .hero-content p {
+          font-size: 1.8rem;
+        }
+
+        .section-title {
+          font-size: 3rem;
+        }
+
+        .about-text {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Adicionando estilos para o botão de idioma */
+      .language-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: 2px solid white;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .language-switch:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Menu mobile */
+      .menu-toggle {
+        display: none;
+        font-size: 1.5rem;
+        color: white;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
+    <button class="language-switch" onclick="toggleLanguage()">EN</button>
+
     <header>
       <nav>
         <div class="logo">Eden Tech</div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
         <div class="nav-links">
           <a href="#sobre">Sobre</a>
           <a href="#projetos">Projetos</a>
@@ -399,6 +568,142 @@
 
       document.querySelectorAll("section").forEach((section) => {
         observer.observe(section);
+      });
+
+      // Sistema de tradução
+      const translations = {
+        pt: {
+          about: "Sobre",
+          projects: "Projetos",
+          skills: "Habilidades",
+          contact: "Contato",
+          hello: "Olá, eu sou",
+          role: "Desenvolvedor Web Full Stack",
+          contactButton: "Entre em Contato",
+          aboutTitle: "Sobre Mim",
+          aboutText1:
+            "Olá! Sou um desenvolvedor apaixonado por criar soluções web inovadoras e funcionais. Com experiência em desenvolvimento full stack, busco sempre aprender novas tecnologias e aprimorar minhas habilidades.",
+          aboutText2:
+            "Meu objetivo é desenvolver aplicações que não apenas funcionem perfeitamente, mas também proporcionem uma excelente experiência ao usuário.",
+          projectsTitle: "Meus Projetos",
+          skillsTitle: "Minhas Habilidades",
+          contactTitle: "Entre em Contato",
+          name: "Nome",
+          email: "Email",
+          message: "Mensagem",
+          sendMessage: "Enviar Mensagem",
+          copyright: "Todos os direitos reservados.",
+        },
+        en: {
+          about: "About",
+          projects: "Projects",
+          skills: "Skills",
+          contact: "Contact",
+          hello: "Hi, I'm",
+          role: "Full Stack Web Developer",
+          contactButton: "Contact Me",
+          aboutTitle: "About Me",
+          aboutText1:
+            "Hello! I'm a developer passionate about creating innovative and functional web solutions. With experience in full stack development, I'm always looking to learn new technologies and improve my skills.",
+          aboutText2:
+            "My goal is to develop applications that not only work perfectly but also provide an excellent user experience.",
+          projectsTitle: "My Projects",
+          skillsTitle: "My Skills",
+          contactTitle: "Contact Me",
+          name: "Name",
+          email: "Email",
+          message: "Message",
+          sendMessage: "Send Message",
+          copyright: "All rights reserved.",
+        },
+      };
+
+      let currentLang = "pt";
+
+      function toggleLanguage() {
+        currentLang = currentLang === "pt" ? "en" : "pt";
+        document.documentElement.lang = currentLang === "pt" ? "pt-BR" : "en";
+        updateContent();
+        document.querySelector(".language-switch").textContent =
+          currentLang === "pt" ? "EN" : "PT";
+      }
+
+      function updateContent() {
+        // Atualizando links de navegação
+        document.querySelector('a[href="#sobre"]').textContent =
+          translations[currentLang].about;
+        document.querySelector('a[href="#projetos"]').textContent =
+          translations[currentLang].projects;
+        document.querySelector('a[href="#habilidades"]').textContent =
+          translations[currentLang].skills;
+        document.querySelector('a[href="#contato"]').textContent =
+          translations[currentLang].contact;
+
+        // Atualizando conteúdo do hero
+        document.querySelector(
+          ".hero-content h1"
+        ).innerHTML = `${translations[currentLang].hello} <span class="highlight">Eden</span>`;
+        document.querySelector(".hero-content p").textContent =
+          translations[currentLang].role;
+        document.querySelector(".hero-content .btn").textContent =
+          translations[currentLang].contactButton;
+
+        // Atualizando seção sobre
+        document.querySelector("#sobre .section-title").textContent =
+          translations[currentLang].aboutTitle;
+        document.querySelector(".about-text p:first-child").textContent =
+          translations[currentLang].aboutText1;
+        document.querySelector(".about-text p:last-child").textContent =
+          translations[currentLang].aboutText2;
+
+        // Atualizando seção projetos
+        document.querySelector("#projetos .section-title").textContent =
+          translations[currentLang].projectsTitle;
+
+        // Atualizando seção habilidades
+        document.querySelector("#habilidades .section-title").textContent =
+          translations[currentLang].skillsTitle;
+
+        // Atualizando seção contato
+        document.querySelector("#contato .section-title").textContent =
+          translations[currentLang].contactTitle;
+        document.querySelector('label[for="name"]').textContent =
+          translations[currentLang].name;
+        document.querySelector('label[for="email"]').textContent =
+          translations[currentLang].email;
+        document.querySelector('label[for="message"]').textContent =
+          translations[currentLang].message;
+        document.querySelector('.btn[type="submit"]').textContent =
+          translations[currentLang].sendMessage;
+
+        // Atualizando footer
+        document.querySelector(
+          "footer p"
+        ).innerHTML = `&copy; 2024 Eden Tech. ${translations[currentLang].copyright}`;
+      }
+
+      // Menu mobile
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+      }
+
+      // Fechar menu ao clicar em um link
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          const navLinks = document.querySelector(".nav-links");
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Fechar menu ao clicar fora
+      document.addEventListener("click", (e) => {
+        const navLinks = document.querySelector(".nav-links");
+        const menuToggle = document.querySelector(".menu-toggle");
+
+        if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+          navLinks.classList.remove("active");
+        }
       });
     </script>
   </body>
